@@ -27,4 +27,7 @@ include_once '../FileHandler/IFileHandler.php';
             return $this->contactDB->delete($contact_id);
         }
 
+        public function update($contact) {
+            return $this->contactDB->update($contact);
+        }
     }

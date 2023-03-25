@@ -26,7 +26,7 @@
         {
             $list = array();
 
-            $stmt = $this->context->db->prepare("select * from contacts");
+            $stmt = $this->context->db->prepare("select * from contacts order by contacts.ID DESC");
             $stmt->execute();
 
             $result = $stmt->get_result();
@@ -43,6 +43,14 @@
             return $list;
         }
     
+        public function update($contact) : int
+        {
+            $stmt = $this->context->db->prepare("update table contacts (nombre,apellido,email) values(?,?,?) where ID = (?)");
+            $stmt->bind_param("sssi", $contact->nombre,$contact->apellido,$contact->email,$contact->id);
+            $stmt->execute();
+            $stmt->close();
+            return 3;
+        }
 
         public function delete($id)
         {
